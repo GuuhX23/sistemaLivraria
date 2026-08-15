@@ -2,6 +2,8 @@ package com.example.sistemadebiblioteca.sistema_biblioteca.controller;
 
 import com.example.sistemadebiblioteca.sistema_biblioteca.entities.Categoria;
 import com.example.sistemadebiblioteca.sistema_biblioteca.service.CategoriaService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,22 +20,32 @@ public class CategoriaController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Categoria> buscarId(@PathVariable Long id) {
-        return categoriaService.buscarId(id);
+    public ResponseEntity<Categoria> buscarId(@PathVariable Long id) {
+        Optional<Categoria> categoria = categoriaService.buscarId(id);
+
+        if(categoria.isPresent()) {
+            return ResponseEntity.ok(categoria.get());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+
     }
 
     @GetMapping
-    public List<Categoria> listarTodos() {
-        return categoriaService.listarTodos();
+    public ResponseEntity<List<Categoria>> listarTodos() {
+       List<Categoria> categorias = categoriaService.listarTodos();
+       return ResponseEntity.ok(categorias);
     }
 
     @PostMapping
-    public Categoria salvarCategoria(@RequestBody Categoria categoria) {
-        return categoriaService.salvarCategoria(categoria);
+    public ResponseEntity<Categoria> salvarCategoria(@RequestBody Categoria categoria) {
+        Categoria categoriaSalva = categoriaService.salvarCategoria(categoria);
+        return ResponseEntity.status(HttpStatus.CREATED).body(categoriaSalva);
     }
 
     @DeleteMapping("/{id}")
-    public void deletar(@PathVariable Long id) {
+    public ResponseEntity<Void> deletar(@PathVariable Long id) {
         categoriaService.deletar(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }
