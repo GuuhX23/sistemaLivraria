@@ -1,4 +1,7 @@
 package com.example.sistemadebiblioteca.sistema_biblioteca.repositoy;
 
-public interface ExemplarRepository {
+import com.example.sistemadebiblioteca.sistema_biblioteca.entities.Exemplar;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface ExemplarRepository extends JpaRepository<Exemplar, Long> {
 }

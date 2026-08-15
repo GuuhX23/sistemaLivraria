@@ -3,6 +3,8 @@ package com.example.sistemadebiblioteca.sistema_biblioteca.entities;
 import jakarta.persistence.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -19,6 +21,9 @@ public class Livro {
     @ManyToOne
     @JoinColumn(name = "categoria_id")
     private Categoria categoria;
+
+    @OneToMany(mappedBy = "livro")
+    private List<Exemplar> exemplares = new ArrayList<>();
 
     public Livro() {
 

@@ -9,11 +9,11 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/exemplares")
-public class ExemparController {
+public class ExemplarController {
 
     private final ExemplarService exemplarService;
 
-    public ExemparController(ExemplarService exemplarService) {
+    public ExemplarController(ExemplarService exemplarService) {
         this.exemplarService = exemplarService;
     }
 
