@@ -2,6 +2,7 @@ package com.example.sistemadebiblioteca.sistema_biblioteca.controller;
 
 import com.example.sistemadebiblioteca.sistema_biblioteca.entities.Exemplar;
 import com.example.sistemadebiblioteca.sistema_biblioteca.service.ExemplarService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,17 +31,20 @@ public class ExemplarController {
     }
 
     @GetMapping
-    public List<Exemplar> listarTodos() {
-        return exemplarService.listarTodos();
+    public ResponseEntity<List<Exemplar>> listarTodos() {
+        List<Exemplar> exemplares = exemplarService.listarTodos();
+        return ResponseEntity.ok(exemplares);
     }
 
     @PostMapping
-    public Exemplar salvarExemplar(@RequestBody Exemplar exemplar) {
-        return exemplarService.salvarExemplar(exemplar);
+    public ResponseEntity<Exemplar> salvarExemplar(@RequestBody Exemplar exemplar) {
+        Exemplar exemplarSalvo = exemplarService.salvarExemplar(exemplar);
+        return ResponseEntity.status(HttpStatus.CREATED).body(exemplarSalvo);
     }
 
     @DeleteMapping("/{id}")
-    public void deletar(@PathVariable Long id) {
+    public ResponseEntity<Void> deletar(@PathVariable Long id) {
         exemplarService.deletar(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }
