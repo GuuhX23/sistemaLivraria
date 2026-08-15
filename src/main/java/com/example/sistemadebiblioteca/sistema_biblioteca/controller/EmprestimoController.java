@@ -4,6 +4,8 @@ import com.example.sistemadebiblioteca.sistema_biblioteca.entities.Emprestimo;
 import com.example.sistemadebiblioteca.sistema_biblioteca.service.EmprestimoService;
 import com.example.sistemadebiblioteca.sistema_biblioteca.service.ExemplarService;
 import com.example.sistemadebiblioteca.sistema_biblioteca.service.UsuarioService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,23 +26,32 @@ public class EmprestimoController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Emprestimo> buscarId(@PathVariable Long id) {
-        return emprestimoService.buscarId(id);
+    public ResponseEntity<Emprestimo> buscarId(@PathVariable Long id) {
+        Optional<Emprestimo> emprestimo = emprestimoService.buscarId(id);
+
+        if(emprestimo.isPresent()) {
+            return ResponseEntity.ok(emprestimo.get());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @GetMapping
-    public List<Emprestimo> listarTodos() {
-        return emprestimoService.listarTodos();
+    public ResponseEntity<List<Emprestimo>> listarTodos() {
+        List<Emprestimo> emprestimos = emprestimoService.listarTodos();
+        return ResponseEntity.ok(emprestimos);
     }
 
     @PostMapping
-    public Emprestimo salvarEmprestimo(@RequestParam Long usuarioId, @RequestParam Long exemplarId) {
-        return emprestimoService.salvarEmprestimo(usuarioId, exemplarId);
+    public ResponseEntity<Emprestimo> salvarEmprestimo(@RequestParam Long usuarioId, @RequestParam Long exemplarId) {
+       Emprestimo emprestimoSalvo = emprestimoService.salvarEmprestimo(usuarioId, exemplarId);
+       return ResponseEntity.status(HttpStatus.CREATED).body(emprestimoSalvo);
     }
 
     @DeleteMapping("/{id}")
-    public void deletar(@PathVariable Long id) {
+    public ResponseEntity<Void> deletar(@PathVariable Long id) {
         emprestimoService.deletar(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
 
