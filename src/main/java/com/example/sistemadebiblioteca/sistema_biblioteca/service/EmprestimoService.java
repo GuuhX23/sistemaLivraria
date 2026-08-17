@@ -9,6 +9,7 @@ import com.example.sistemadebiblioteca.sistema_biblioteca.repositoy.UsuarioRepos
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -34,8 +35,11 @@ public class EmprestimoService {
 
     public Emprestimo salvarEmprestimo(Long usuarioId, Long exemplarId) {
 
-        Usuario usuario = usuarioRepository.findById(usuarioId).get();
-        Exemplar exemplar = exemplarRepository.findById(exemplarId).get();
+        Usuario usuario = usuarioRepository.findById(usuarioId)
+                .orElseThrow(() -> new NoSuchElementException("Usuario nao encontrado"));
+
+        Exemplar exemplar = exemplarRepository.findById(exemplarId)
+                .orElseThrow(() -> new NoSuchElementException("Exemplar nao encontrado"));
 
         Emprestimo novoEmprestimo = new Emprestimo();
         novoEmprestimo.setUsuario(usuario);
