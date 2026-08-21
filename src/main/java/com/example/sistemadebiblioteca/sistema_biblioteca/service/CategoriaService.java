@@ -6,6 +6,7 @@ import com.example.sistemadebiblioteca.sistema_biblioteca.repositoy.ExemplarRepo
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -17,8 +18,9 @@ public class CategoriaService {
         this.categoriaRepository = categoriaRepository;
     }
 
-    public Optional<Categoria> buscarId(Long id) {
-        return categoriaRepository.findById(id);
+    public Categoria buscarId(Long id) {
+        return categoriaRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Categoria nao encontrado"));
     }
 
     public List<Categoria> listarTodos() {

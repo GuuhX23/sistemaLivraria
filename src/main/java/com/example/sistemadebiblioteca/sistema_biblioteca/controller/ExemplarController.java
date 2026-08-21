@@ -21,13 +21,8 @@ public class ExemplarController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Exemplar> buscarId(@PathVariable Long id) {
-        Optional<Exemplar> exemplar = exemplarService.buscarId(id);
-
-        if(exemplar.isPresent()) {
-            return ResponseEntity.ok(exemplar.get());
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+        Exemplar exemplar = exemplarService.buscarId(id);
+        return ResponseEntity.ok(exemplar);
     }
 
     @GetMapping

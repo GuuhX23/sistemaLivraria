@@ -25,8 +25,9 @@ public class EmprestimoService {
         this.usuarioRepository = usuarioRepository;
     }
 
-    public Optional<Emprestimo> buscarId(Long id) {
-        return emprestimoRepository.findById(id);
+    public Emprestimo buscarId(Long id) {
+        return emprestimoRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Emprestimo nao encontrado"));
     }
 
     public List<Emprestimo> listarTodos() {

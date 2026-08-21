@@ -27,13 +27,8 @@ public class EmprestimoController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Emprestimo> buscarId(@PathVariable Long id) {
-        Optional<Emprestimo> emprestimo = emprestimoService.buscarId(id);
-
-        if(emprestimo.isPresent()) {
-            return ResponseEntity.ok(emprestimo.get());
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+        Emprestimo emprestimo = emprestimoService.buscarId(id);
+        return ResponseEntity.ok(emprestimo);
     }
 
     @GetMapping

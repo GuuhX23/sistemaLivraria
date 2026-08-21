@@ -6,6 +6,7 @@ import com.example.sistemadebiblioteca.sistema_biblioteca.repositoy.UsuarioRepos
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -17,8 +18,9 @@ public class UsuarioService {
         this.usuarioRepository = usuarioRepository;
     }
 
-   public Optional<Usuario> buscarId(Long id) {
-        return usuarioRepository.findById(id);
+   public Usuario buscarId(Long id) {
+        return usuarioRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Usuario nao encontrado"));
    }
 
    public List<Usuario> listarTodos() {

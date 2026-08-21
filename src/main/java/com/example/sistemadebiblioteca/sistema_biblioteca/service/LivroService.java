@@ -5,6 +5,7 @@ import com.example.sistemadebiblioteca.sistema_biblioteca.repositoy.LivroReposit
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.Set;
 
@@ -18,8 +19,9 @@ public class LivroService {
         this.livroRepository = livroRepository;
     }
 
-    public Optional<Livro> buscarId(Long id) {
-        return livroRepository.findById(id);
+    public Livro buscarId(Long id) {
+        return livroRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Livro nao encontrado"));
     }
 
     public Livro salvarLivro(Livro livro) {

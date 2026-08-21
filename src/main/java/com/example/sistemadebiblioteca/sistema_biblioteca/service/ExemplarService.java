@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import javax.swing.text.html.Option;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -17,8 +18,9 @@ public class ExemplarService {
         this.exemplarRepository = exemplarRepository;
     }
 
-    public Optional<Exemplar> buscarId(Long id) {
-        return exemplarRepository.findById(id);
+    public Exemplar buscarId(Long id) {
+        return exemplarRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Exemplar nao encontrado"));
     }
 
     public List<Exemplar> listarTodos() {

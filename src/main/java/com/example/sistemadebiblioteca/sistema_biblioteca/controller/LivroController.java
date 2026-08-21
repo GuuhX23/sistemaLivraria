@@ -28,13 +28,8 @@ public class LivroController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Livro> buscarId(@PathVariable Long id) {
-        Optional<Livro> livro = livroService.buscarId(id);
-
-        if (livro.isPresent()) {
-            return ResponseEntity.ok(livro.get());
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+        Livro livro = livroService.buscarId(id);
+        return ResponseEntity.ok(livro);
     }
 
     @PostMapping

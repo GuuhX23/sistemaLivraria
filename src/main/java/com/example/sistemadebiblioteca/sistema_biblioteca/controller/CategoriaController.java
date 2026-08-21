@@ -21,14 +21,8 @@ public class CategoriaController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Categoria> buscarId(@PathVariable Long id) {
-        Optional<Categoria> categoria = categoriaService.buscarId(id);
-
-        if(categoria.isPresent()) {
-            return ResponseEntity.ok(categoria.get());
-        } else {
-            return ResponseEntity.notFound().build();
-        }
-
+        Categoria categoria = categoriaService.buscarId(id);
+        return ResponseEntity.ok(categoria);
     }
 
     @GetMapping
