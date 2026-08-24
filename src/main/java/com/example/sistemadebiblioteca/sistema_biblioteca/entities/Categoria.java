@@ -1,6 +1,7 @@
 package com.example.sistemadebiblioteca.sistema_biblioteca.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -15,6 +16,7 @@ public class Categoria {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "O nome e obrigatorio")
     private String nome;
 
     @OneToMany(mappedBy = "categoria")

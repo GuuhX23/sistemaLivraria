@@ -1,6 +1,7 @@
 package com.example.sistemadebiblioteca.sistema_biblioteca.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 
 import java.util.Objects;
 import java.util.Set;
@@ -12,7 +13,11 @@ public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotBlank(message = "o nome e obrigatorio")
     private String nome;
+
+    @NotBlank(message = "O email e obrigatorio")
     private String email;
 
    @OneToMany(mappedBy = "usuario")

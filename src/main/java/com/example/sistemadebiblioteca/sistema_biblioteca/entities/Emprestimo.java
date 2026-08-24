@@ -1,6 +1,8 @@
 package com.example.sistemadebiblioteca.sistema_biblioteca.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 import java.util.Date;
 import java.util.Objects;
@@ -15,14 +17,21 @@ public class Emprestimo {
 
     @ManyToOne
     @JoinColumn(name = "usuario_id")
+    @NotNull(message = "O usuario e obrigatorio")
     private Usuario usuario;
 
     @ManyToOne
     @JoinColumn(name = "exemplar_id")
+    @NotNull(message = "O exemplar e obrigatorio")
     private Exemplar exemplar;
 
+    @NotNull(message = "A data de emprestimo e obrigatorio")
     private Date dateEmprestimo;
+
+    @NotNull(message = "A data prevista e obrigatorio")
     private Date dataDevolucaoPrevista;
+
+    @NotNull(message = "A data de devolucao e obrigatorio")
     private Date dataDevolucaoReal;
 
     public Emprestimo() {}

@@ -1,6 +1,8 @@
 package com.example.sistemadebiblioteca.sistema_biblioteca.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jdk.jshell.Snippet;
 
 import java.util.HashSet;
@@ -17,9 +19,13 @@ public class Exemplar {
 
     @ManyToOne
     @JoinColumn(name = "livro_id")
+    @NotNull(message = "O livro e obrigatorio")
     private Livro livro;
 
+    @NotBlank(message = "O codigo de barras e obrigatorio")
     private String CodigoBarras;
+
+    @NotBlank(message = "O status e obrigatorio")
     private String status;
 
    @OneToMany(mappedBy = "exemplar")

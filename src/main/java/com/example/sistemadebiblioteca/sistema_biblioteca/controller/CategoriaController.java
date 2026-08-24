@@ -2,6 +2,7 @@ package com.example.sistemadebiblioteca.sistema_biblioteca.controller;
 
 import com.example.sistemadebiblioteca.sistema_biblioteca.entities.Categoria;
 import com.example.sistemadebiblioteca.sistema_biblioteca.service.CategoriaService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -32,7 +33,7 @@ public class CategoriaController {
     }
 
     @PostMapping
-    public ResponseEntity<Categoria> salvarCategoria(@RequestBody Categoria categoria) {
+    public ResponseEntity<Categoria> salvarCategoria(@Valid @RequestBody Categoria categoria) {
         Categoria categoriaSalva = categoriaService.salvarCategoria(categoria);
         return ResponseEntity.status(HttpStatus.CREATED).body(categoriaSalva);
     }

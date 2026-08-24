@@ -2,6 +2,7 @@ package com.example.sistemadebiblioteca.sistema_biblioteca.controller;
 
 import com.example.sistemadebiblioteca.sistema_biblioteca.entities.Livro;
 import com.example.sistemadebiblioteca.sistema_biblioteca.service.LivroService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,7 +34,7 @@ public class LivroController {
     }
 
     @PostMapping
-    public ResponseEntity<Livro> salvarLivro(@RequestBody Livro livro) {
+    public ResponseEntity<Livro> salvarLivro(@Valid @RequestBody Livro livro) {
        Livro livroSalvo = livroService.salvarLivro(livro);
        return ResponseEntity.status(HttpStatus.CREATED).body(livroSalvo);
     }

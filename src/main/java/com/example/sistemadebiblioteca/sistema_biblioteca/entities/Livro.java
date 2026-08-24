@@ -1,6 +1,8 @@
 package com.example.sistemadebiblioteca.sistema_biblioteca.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
@@ -15,11 +17,15 @@ public class Livro {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "O tituo e obrigatorio")
     private String titulo;
+
+    @NotBlank(message = "O autor e obrigatorio")
     private String autor;
 
     @ManyToOne
     @JoinColumn(name = "categoria_id")
+    @NotNull(message = "A categotia e obrigatoria")
     private Categoria categoria;
 
     @OneToMany(mappedBy = "livro")

@@ -4,6 +4,7 @@ import com.example.sistemadebiblioteca.sistema_biblioteca.entities.Emprestimo;
 import com.example.sistemadebiblioteca.sistema_biblioteca.service.EmprestimoService;
 import com.example.sistemadebiblioteca.sistema_biblioteca.service.ExemplarService;
 import com.example.sistemadebiblioteca.sistema_biblioteca.service.UsuarioService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -38,7 +39,7 @@ public class EmprestimoController {
     }
 
     @PostMapping
-    public ResponseEntity<Emprestimo> salvarEmprestimo(@RequestParam Long usuarioId, @RequestParam Long exemplarId) {
+    public ResponseEntity<Emprestimo> salvarEmprestimo(@Valid @RequestParam Long usuarioId, @RequestParam Long exemplarId) {
        Emprestimo emprestimoSalvo = emprestimoService.salvarEmprestimo(usuarioId, exemplarId);
        return ResponseEntity.status(HttpStatus.CREATED).body(emprestimoSalvo);
     }

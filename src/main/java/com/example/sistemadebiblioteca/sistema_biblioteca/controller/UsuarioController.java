@@ -4,6 +4,7 @@ package com.example.sistemadebiblioteca.sistema_biblioteca.controller;
 import com.example.sistemadebiblioteca.sistema_biblioteca.entities.Usuario;
 import com.example.sistemadebiblioteca.sistema_biblioteca.service.UsuarioService;
 import jakarta.persistence.NamedStoredProcedureQuery;
+import jakarta.validation.Valid;
 import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -36,7 +37,7 @@ public class UsuarioController {
     }
 
     @PostMapping
-    public ResponseEntity<Usuario> salvarUsuario(@RequestBody Usuario usuario) {
+    public ResponseEntity<Usuario> salvarUsuario(@Valid @RequestBody Usuario usuario) {
         Usuario usuarioSalvo = usuarioService.salvarUsuario(usuario);
         return ResponseEntity.status(HttpStatus.CREATED).body(usuarioSalvo);
     }
