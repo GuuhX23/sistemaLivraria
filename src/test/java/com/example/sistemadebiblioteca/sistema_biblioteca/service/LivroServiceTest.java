@@ -41,7 +41,8 @@ class LivroServiceTest {
     //buscarId e lanca um erro
     void deveLancarExcecaoQuandoIdNaoExistir() {
         when(livroRepository.findById(99L)).thenReturn(Optional.empty());
-
+        //Optional.empty() simula o cenario
+        // em que o registtro/categoria com id 99 nao foi encontrado
         assertThrows(NoSuchElementException.class, () -> livroService.buscarId(99L));
     }
 
