@@ -7,14 +7,16 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.times;
 
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class CategoriaServiceTest {
@@ -100,5 +102,40 @@ class CategoriaServiceTest {
 
         verify(categoriaRepository).deleteById(1L);
     }
+
+    @Test
+    void deveAtualizarCategoriaComSucesso() {
+        // 1. ARRANGE (Preparação dos dados e cenários)
+        Long idExistente = 1L;
+
+        // Objeto vindo na requisição (dados novos)
+        Categoria categoriaParaAtualizar = new Categoria(null, "Livros de Ficção");
+
+        // Objeto existente no banco de dados antes da alteração
+        Categoria categoriaExistente = new Categoria(idExistente, "Livros");
+
+        // Objeto retornado após salvar a alteração
+        Categoria categoriaSalva = new Categoria(idExistente, "Livros de Ficção");
+
+        // Ensinar os Mocks como devem responder
+        when(categoriaRepository.findById(idExistente))
+                .thenReturn(Optional.of(categoriaExistente));
+
+        when(categoriaRepository.save(any(Categoria.class)))
+                .thenReturn(categoriaSalva);
+
+        // 2. ACT (Execução da ação a ser testada)
+        Categoria resultado = categoriaService.atualizar(idExistente, categoriaParaAtualizar);
+
+        // 3. ASSERT (Verificações dos resultants)
+        assertNotNull(resultado);
+        assertEquals(idExistente, resultado.getId());
+        assertEquals("Livros de Ficção", resultado.getNome());
+
+        // Verificar se os métodos do repositório foram chamados exatamente 1 vez
+        verify(categoriaRepository, times(1)).findById(idExistente);
+        verify(categoriaRepository, times(1)).save(any(Categoria.class));
+    }
+
 
 }

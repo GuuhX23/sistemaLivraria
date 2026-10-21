@@ -32,4 +32,14 @@ public class CategoriaService {
     public void deletar(Long id) {
         categoriaRepository.deleteById(id);
     }
+
+    public Categoria atualizar(Long id, Categoria categoriaAtualizada) {
+        Categoria categoriaExistente = categoriaRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Categoria nao encontrada"));
+
+        categoriaExistente.setNome(categoriaAtualizada.getNome());
+
+
+        return categoriaRepository.save(categoriaExistente);
+    }
 }
