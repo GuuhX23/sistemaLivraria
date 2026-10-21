@@ -1,4 +1,4 @@
-package com.example.sistemadebiblioteca.sistema_biblioteca.repositoy;
+package com.example.sistemadebiblioteca.sistema_biblioteca.repository;
 
 import com.example.sistemadebiblioteca.sistema_biblioteca.entities.Emprestimo;
 import org.springframework.data.jpa.repository.JpaRepository;

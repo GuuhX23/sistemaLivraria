@@ -1,7 +1,7 @@
 package com.example.sistemadebiblioteca.sistema_biblioteca.service;
 
 import com.example.sistemadebiblioteca.sistema_biblioteca.entities.Livro;
-import com.example.sistemadebiblioteca.sistema_biblioteca.repositoy.LivroRepository;
+import com.example.sistemadebiblioteca.sistema_biblioteca.repository.LivroRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

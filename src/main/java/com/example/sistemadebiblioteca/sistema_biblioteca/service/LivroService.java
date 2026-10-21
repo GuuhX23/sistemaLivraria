@@ -1,13 +1,11 @@
 package com.example.sistemadebiblioteca.sistema_biblioteca.service;
 
 import com.example.sistemadebiblioteca.sistema_biblioteca.entities.Livro;
-import com.example.sistemadebiblioteca.sistema_biblioteca.repositoy.LivroRepository;
+import com.example.sistemadebiblioteca.sistema_biblioteca.repository.LivroRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Optional;
-import java.util.Set;
 
 
 @Service

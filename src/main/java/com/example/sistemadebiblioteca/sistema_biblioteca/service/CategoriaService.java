@@ -1,13 +1,11 @@
 package com.example.sistemadebiblioteca.sistema_biblioteca.service;
 
 import com.example.sistemadebiblioteca.sistema_biblioteca.entities.Categoria;
-import com.example.sistemadebiblioteca.sistema_biblioteca.repositoy.CategoriaRepository;
-import com.example.sistemadebiblioteca.sistema_biblioteca.repositoy.ExemplarRepository;
+import com.example.sistemadebiblioteca.sistema_biblioteca.repository.CategoriaRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 
 @Service
 public class CategoriaService {

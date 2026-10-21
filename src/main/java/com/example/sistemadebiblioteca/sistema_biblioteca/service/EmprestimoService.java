@@ -3,14 +3,13 @@ package com.example.sistemadebiblioteca.sistema_biblioteca.service;
 import com.example.sistemadebiblioteca.sistema_biblioteca.entities.Emprestimo;
 import com.example.sistemadebiblioteca.sistema_biblioteca.entities.Exemplar;
 import com.example.sistemadebiblioteca.sistema_biblioteca.entities.Usuario;
-import com.example.sistemadebiblioteca.sistema_biblioteca.repositoy.EmprestimoRepository;
-import com.example.sistemadebiblioteca.sistema_biblioteca.repositoy.ExemplarRepository;
-import com.example.sistemadebiblioteca.sistema_biblioteca.repositoy.UsuarioRepository;
+import com.example.sistemadebiblioteca.sistema_biblioteca.repository.EmprestimoRepository;
+import com.example.sistemadebiblioteca.sistema_biblioteca.repository.ExemplarRepository;
+import com.example.sistemadebiblioteca.sistema_biblioteca.repository.UsuarioRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 
 @Service
 public class EmprestimoService {
